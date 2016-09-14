@@ -10,8 +10,12 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Location.java 8/30/16, 2016
@@ -19,7 +23,7 @@ import java.util.Arrays;
  * @author mkvitko
  */
 @Entity
-@Table(name = "Location1")
+@Table(name = "location1")
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -31,4 +35,6 @@ public class Location {
     private Boolean isRegistred;
     private String name;
     private String address;
+    @ManyToMany(mappedBy = "restaurants")
+    private List<Owner> owners;
 }

@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author mkvitko
  */
 @Entity
-@Table(name = "Waitress1")
+@Table(name = "waitress1")
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -31,6 +31,6 @@ public class Waitress {
     private Integer idWaitress;
     private String name;
     @ManyToOne
-    @JoinColumn(name = "location1id_location", referencedColumnName = "id_location", nullable = false)
+    @JoinColumn(name = "location1id_location", nullable = false)
     private Location location;
 }

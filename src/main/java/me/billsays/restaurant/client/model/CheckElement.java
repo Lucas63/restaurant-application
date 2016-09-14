@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author mkvitko
  */
 @Entity
-@Table(name = "Checkelement1")
+@Table(name = "checkelement1")
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -33,6 +33,6 @@ public class CheckElement {
     private Double elementcost;
     private Integer amount;
     @ManyToOne
-    @JoinColumn(name = "check1id_check", referencedColumnName = "id_check", nullable = false)
+    @JoinColumn(name = "check1id_check", nullable = false)
     private Check check;
 }

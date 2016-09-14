@@ -1,15 +1,10 @@
-package me.billsays.restaurant.client.model;
+package me.billsays.restaurant.client.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.sql.Date;
 
 /**
@@ -17,14 +12,11 @@ import java.sql.Date;
  *
  * @author mkvitko
  */
-@Entity
-@Table(name = "check1")
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Check {
-    @Id
+public class CheckDTO {
     private Integer idCheck;
     private Date dateCreated;
     private Double totalCost;

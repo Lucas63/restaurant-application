@@ -7,10 +7,20 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Owner.java 8/30/16, 2016
@@ -18,16 +28,23 @@ import javax.persistence.Table;
  * @author mkvitko
  */
 @Entity
-@Table(name = "Owner1")
+@Table(name = "user1")
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@Builder
-public class Owner {
-    @Id
-    private Integer idOwner;
-    private String name;
-    private String email;
-    private String password;
+@DiscriminatorValue("owner")
+public class Owner extends User {
+    @Builder(toBuilder = true)
+    public Owner(Integer idUser, String name, String email, Date dateregistration, String password,
+                 Set<Role> roles, List<Location> restaurants) {
+        super(idUser, name, email, dateregistration, password, roles);
+        this.restaurants = restaurants;
+    }
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name="location_user",
+            joinColumns={ @JoinColumn(name="id_user")},
+            inverseJoinColumns={ @JoinColumn(name="id_location")})
+    private List<Location> restaurants = new ArrayList<>();
 }

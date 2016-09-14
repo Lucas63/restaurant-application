@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author mkvitko
  */
 @Entity
-@Table(name = "Mention1")
+@Table(name = "mention1")
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -34,6 +34,6 @@ public class Mention {
     private Integer foodRate;
     private Integer musicRate;
     @OneToOne
-    @JoinColumn(name = "id_mention", referencedColumnName = "id_check", nullable = false)
+    @JoinColumn(name = "id_mention", nullable = false)
     private Check check;
 }

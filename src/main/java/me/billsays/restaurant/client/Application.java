@@ -3,7 +3,6 @@ package me.billsays.restaurant.client;
 import org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
@@ -14,7 +13,7 @@ import javax.security.auth.message.config.AuthConfigFactory;
  *
  * @author mkvitko
  */
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
+@SpringBootApplication
 public class Application extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
