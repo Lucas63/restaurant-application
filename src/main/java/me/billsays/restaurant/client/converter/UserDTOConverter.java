@@ -1,5 +1,6 @@
 package me.billsays.restaurant.client.converter;
 
+import me.billsays.restaurant.client.controller.dto.OwnerDTO;
 import me.billsays.restaurant.client.controller.dto.UserDTO;
 import me.billsays.restaurant.client.model.Owner;
 import me.billsays.restaurant.client.model.User;
@@ -8,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,6 +31,7 @@ public class UserDTOConverter {
                 .email(userDTO.getEmail())
                 .name(userDTO.getName())
                 .password(encoder.encode(userDTO.getPassword()))
+                .confirmed(userDTO.getConfirmed())
                 .idUser(userDTO.getIdUser())
                 .roles(Optional.ofNullable(userDTO.getRoles())
                         .map(roles -> roles.stream().map(roleDTOConverter::convertFrom)
@@ -38,5 +39,18 @@ public class UserDTOConverter {
                 .build();
         user.getRoles().stream().forEach(role -> role.setUser(user));
         return user;
+    }
+
+    public UserDTO convertTo(User user) {
+        return (UserDTO) OwnerDTO.builder()
+                .dateregistration(user.getDateregistration())
+                .email(user.getEmail())
+                .name(user.getName())
+                .confirmed(user.getConfirmed())
+                .idUser(user.getIdUser())
+                .roles(Optional.ofNullable(user.getRoles())
+                        .map(roles -> roles.stream().map(roleDTOConverter::convertTo)
+                                .collect(Collectors.toSet())).orElse(Collections.emptySet()))
+                .build();
     }
 }

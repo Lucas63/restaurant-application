@@ -37,8 +37,8 @@ import java.util.Set;
 public class Owner extends User {
     @Builder(toBuilder = true)
     public Owner(Integer idUser, String name, String email, Date dateregistration, String password,
-                 Set<Role> roles, List<Location> restaurants) {
-        super(idUser, name, email, dateregistration, password, roles);
+                 Boolean confirmed, Set<Role> roles, List<Location> restaurants, ConfirmationToken token) {
+        super(idUser, name, email, dateregistration, password, confirmed, token, roles);
         this.restaurants = restaurants;
     }
     @OneToMany(fetch = FetchType.EAGER)

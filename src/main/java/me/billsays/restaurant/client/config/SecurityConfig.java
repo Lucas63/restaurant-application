@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Created by imurashko on 07.07.2016.
+ * Created by mkvikto on 07.07.2016.
  */
 @Configuration
 @EnableWebSecurity
@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/css/**", "/fonts/**", "/js/**", "/img/**", "**/favicon.ico", "/registerUser/**",
-                        "/registerOwner/**")
+                        "/registerOwner/**", "/confirm/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

@@ -19,5 +19,4 @@ import lombok.NoArgsConstructor;
 public class RoleDTO {
     private Integer idRole;
     private String roleName;
-    private UserDTO user;
 }

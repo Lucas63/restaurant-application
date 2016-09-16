@@ -24,8 +24,8 @@ import java.util.Set;
 public class OwnerDTO extends UserDTO {
     @Builder(toBuilder = true)
     public OwnerDTO(Integer idUser, String name, String email, Date dateregistration, String password,
-                    String passwordConfirmation, Set<RoleDTO> roles, List<LocationDTO> restaurants) {
-        super(idUser, name, email, dateregistration, password, passwordConfirmation, roles);
+                    String passwordConfirmation, Boolean confirmed, Set<RoleDTO> roles, List<LocationDTO> restaurants) {
+        super(idUser, name, email, dateregistration, confirmed, password, passwordConfirmation, roles);
         this.restaurants = restaurants;
     }
     private List<LocationDTO> restaurants;

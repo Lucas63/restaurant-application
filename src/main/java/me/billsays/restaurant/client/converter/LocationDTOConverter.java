@@ -2,6 +2,7 @@ package me.billsays.restaurant.client.converter;
 
 import me.billsays.restaurant.client.controller.dto.LocationDTO;
 import me.billsays.restaurant.client.model.Location;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**

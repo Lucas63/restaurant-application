@@ -27,6 +27,7 @@ public class UserDTO {
     protected String name;
     protected String email;
     protected Date dateregistration;
+    protected Boolean confirmed;
     protected String password;
     protected String passwordConfirmation;
     protected Set<RoleDTO> roles;

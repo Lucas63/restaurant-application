@@ -17,4 +17,11 @@ public class RoleDTOConverter {
                 .roleName(roleDTO.getRoleName())
                 .build();
     }
+
+    public RoleDTO convertTo(Role role) {
+        return RoleDTO.builder()
+                .idRole(role.getIdRole())
+                .roleName(role.getRoleName())
+                .build();
+    }
 }

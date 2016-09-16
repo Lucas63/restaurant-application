@@ -32,6 +32,7 @@ public class OwnerDTOConverter {
                 .email(ownerDTO.getEmail())
                 .name(ownerDTO.getName())
                 .password(encoder.encode(ownerDTO.getPassword()))
+                .confirmed(ownerDTO.getConfirmed())
                 .idUser(ownerDTO.getIdUser())
                 .roles(Optional.ofNullable(ownerDTO.getRoles())
                         .map(roles -> roles.stream().map(roleDTOConverter::convertFrom)
