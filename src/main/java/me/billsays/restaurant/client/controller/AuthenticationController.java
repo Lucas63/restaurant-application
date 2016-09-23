@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +35,7 @@ import javax.mail.MessagingException;
 public class AuthenticationController {
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     @ResponseBody
-    public String verify(@RequestBody UserDTO newUser) {
+    public String addUser(@RequestBody UserDTO newUser) {
         if (newUser != null && (newUser.getPassword().equals(newUser.getPasswordConfirmation()))
                 && !userService.findUserByEmail(newUser.getEmail()).isPresent()) {
             User result = userService.saveNewUser(userDTOConverter.convertFrom(newUser));
@@ -55,7 +56,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/registerOwner", method = RequestMethod.POST)
     @ResponseBody
-    public String verify(@RequestBody OwnerDTO newUser) {
+    public String addOwner(@RequestBody OwnerDTO newUser) {
         if (newUser != null && (newUser.getPassword().equals(newUser.getPasswordConfirmation()))
                 && !userService.findUserByEmail(newUser.getEmail()).isPresent()) {
             Owner result = userService.saveNewOwner(ownerDTOConverter.convertFrom(newUser));
@@ -94,6 +95,42 @@ public class AuthenticationController {
         } else {
             return "ERROR: received empty token!";
         }
+    }
+    @RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String getUser(@PathVariable("id") Integer idUser) {
+        if (!StringUtils.isEmpty(idUser)) {
+            User user = userService.findUserById(idUser);
+            if (user != null) {
+                try {
+                    return new ObjectMapper().writerWithDefaultPrettyPrinter()
+                            .writeValueAsString(userDTOConverter.convertTo(user));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                return "ERROR: There is no such user in DB!";
+            }
+        }
+        return "ERROR: received empty id!";
+    }
+    @RequestMapping(value = "/getOwner/{id}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String getOwner(@PathVariable("id") Integer idOwner) {
+        if (!StringUtils.isEmpty(idOwner)) {
+            Owner user = userService.findOwnerById(idOwner);
+            if (user != null) {
+                try {
+                    return new ObjectMapper().writerWithDefaultPrettyPrinter()
+                            .writeValueAsString(ownerDTOConverter.convertTo(user));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                return "ERROR: There is no such owner in DB!";
+            }
+        }
+        return "ERROR: received empty id!";
     }
 
     @Autowired

@@ -25,7 +25,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "confirmation_token")
 @Data
-@EqualsAndHashCode(exclude = "user")
+@EqualsAndHashCode(exclude = {"user"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

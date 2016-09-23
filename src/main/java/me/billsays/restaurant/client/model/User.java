@@ -35,7 +35,7 @@ import java.util.Set;
 @Table(name = "user1")
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"roles"})
+@EqualsAndHashCode(exclude = {"roles", "token"})
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
@@ -52,7 +52,7 @@ public class User {
     protected String password;
     protected Boolean confirmed;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false, name = "id_user")
+    @JoinColumn(name = "id_token")
     protected ConfirmationToken token;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")

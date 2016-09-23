@@ -40,6 +40,5 @@ public class Application extends SpringBootServletInitializer {
             AuthConfigFactory.setFactory(new AuthConfigFactoryImpl());
         }
         SpringApplication.run(Application.class, args);
-
     }
 }

@@ -18,6 +18,16 @@ public class LocationDTOConverter {
                 .idLocation(locationDTO.getIdLocation())
                 .isRegistred(locationDTO.getIsRegistred())
                 .name(locationDTO.getName())
+                .dateCreation(locationDTO.getDateCreation())
+                .build();
+    }
+    public LocationDTO convertTo(Location location) {
+        return LocationDTO.builder()
+                .address(location.getAddress())
+                .idLocation(location.getIdLocation())
+                .isRegistred(location.getIsRegistred())
+                .name(location.getName())
+                .dateCreation(location.getDateCreation())
                 .build();
     }
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -23,4 +24,5 @@ public class LocationDTO {
     private Boolean isRegistred;
     private String name;
     private String address;
+    private Date dateCreation;
 }

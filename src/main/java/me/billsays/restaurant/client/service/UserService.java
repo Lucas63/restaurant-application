@@ -71,4 +71,10 @@ public class UserService {
         owner.setToken(ConfirmationToken.builder().token(UUID.randomUUID().toString()).user(owner).build());
         return ownerRepository.save(owner);
     }
+    public Owner findOwnerById(Integer idOwner) {
+        return ownerRepository.findOne(idOwner);
+    }
+    public User findUserById(Integer idUser) {
+        return userRepository.findOne(idUser);
+    }
 }

@@ -39,10 +39,28 @@ public class OwnerDTOConverter {
                                 .collect(Collectors.toSet())).orElse(new HashSet<>()))
                 .restaurants(Optional.ofNullable(ownerDTO.getRestaurants())
                         .map(rests -> rests.stream().map(locationDTOConverter::convertFrom)
+                                .collect(Collectors.toSet()))
+                        .orElse(new HashSet<>()))
+                .build();
+        owner.getRoles().stream().forEach(role -> role.setUser(owner));
+        return owner;
+    }
+    public OwnerDTO convertTo(Owner owner) {
+        OwnerDTO ownerDTO = OwnerDTO.builder()
+                .dateregistration(owner.getDateregistration())
+                .email(owner.getEmail())
+                .name(owner.getName())
+                .confirmed(owner.getConfirmed())
+                .idUser(owner.getIdUser())
+                .roles(Optional.ofNullable(owner.getRoles())
+                        .map(roles -> roles.stream().map(roleDTOConverter::convertTo)
+                                .collect(Collectors.toSet())).orElse(new HashSet<>()))
+                .restaurants(Optional.ofNullable(owner.getRestaurants())
+                        .map(rests -> rests.stream().map(locationDTOConverter::convertTo)
                                 .collect(Collectors.toList()))
                         .orElse(new ArrayList<>()))
                 .build();
         owner.getRoles().stream().forEach(role -> role.setUser(owner));
-        return owner;
+        return ownerDTO;
     }
 }
