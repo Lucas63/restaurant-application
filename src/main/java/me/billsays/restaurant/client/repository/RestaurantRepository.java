@@ -4,6 +4,7 @@ import me.billsays.restaurant.client.model.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,6 @@ public interface RestaurantRepository extends JpaRepository<Location, Integer> {
     int addRestaurantToOwner(Integer idLocation, Integer idOwner);
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM location_user WHERE id_location = :idLocation AND id_user = :idUser;", nativeQuery = true)
-    int removeRestaurantFromOwner(Integer idLocation, Integer idUser);
+    @Query(value = "DELETE FROM location_user WHERE (id_location = :idLocation) AND (id_user = :idUser);", nativeQuery = true)
+    int removeRestaurantFromOwner(@Param("idLocation") Integer idLocation, @Param("idUser") Integer idUser);
 }
